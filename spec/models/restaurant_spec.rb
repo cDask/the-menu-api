@@ -5,7 +5,7 @@ RSpec.describe Restaurant, type: :model do
   subject {described_class.new(
     name: 'Jacked Juice',
     subdomain: 'jackedjuice',
-    opening_hours: ''
+    opening_hours: "{'monday':[1100, 1300]}"
   )}
 
   context 'validations' do
@@ -32,8 +32,6 @@ RSpec.describe Restaurant, type: :model do
       subject.opening_hours = 'hello'
       expect(subject).to_not be_valid
     end
-
-    it { should validate_uniqueness_of(:subdomain) }
     
     it 'subdomain is unique' do
       #TODO check this one
