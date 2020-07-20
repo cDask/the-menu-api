@@ -67,6 +67,8 @@ RSpec.describe Restaurant, type: :model do
   end
 end
 
+
+# Shoulda Matches Tests
 RSpec.describe Restaurant, type: :model do
   describe 'associations' do
     it { should belong_to(:user).class_name('User') }
