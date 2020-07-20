@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Menu, type: :model do
   let(:restaurant) { Restaurant.new }
+  let(:items) { Item.new }
+  let(:theme) { Theme.new }
+  let(:styles) { Style.new }
   subject { described_class.new(
     title: 'Main Menu',
     restaurant: restaurant
@@ -22,6 +25,21 @@ RSpec.describe Menu, type: :model do
     it 'belongs to a restaurant' do
       relation = Menu.reflect_on_association(:restaurant)
       expect(relation.macro).to eql(:belongs_to)
+    end
+
+    it 'has many items' do
+      relation = Menu.reflect_on_association(:items)
+      expect(relation.macro).to eql(:has_many)
+    end
+
+    it 'has one theme' do
+      relation = Menu.reflect_on_association(:theme)
+      expect(relation.macro).to eql(:has_one)
+    end
+
+    it 'has many styles' do
+      relation = Menu.reflect_on_association(:styles)
+      expect(relation.macro).to eql(:has_many)
     end
   end
 end
