@@ -43,7 +43,8 @@ RSpec.describe Restaurant, type: :model do
       subject2 = Restaurant.new(
         name: 'jacked juice',
         subdomain: 'jackedjuice',
-        opening_hours: ''
+        opening_hours: "{'monday':[1100, 1300]}",
+        user: user
       )
       expect(subject2).to_not be_valid
     end
