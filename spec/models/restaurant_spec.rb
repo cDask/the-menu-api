@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe Restaurant, type: :model do
   let(:user) { User.new }
   let(:contact_infos) { ContactInfo.new }
+  let(:menus) { Menu.new }
   subject {described_class.new(
     name: 'Jacked Juice',
     subdomain: 'jackedjuice',
     opening_hours: "{'monday':[1100, 1300]}",
     user: user
-
   )}
 
   context 'validations' do
@@ -55,6 +55,11 @@ RSpec.describe Restaurant, type: :model do
 
     it 'has much contact info' do 
       relation = Restaurant.reflect_on_association(:contact_infos)
+      expect(relation.macro).to eql(:has_many)
+    end
+
+    it 'has many menus' do 
+      relation = Restaurant.reflect_on_association(:menus)
       expect(relation.macro).to eql(:has_many)
     end
   end
