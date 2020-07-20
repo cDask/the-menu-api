@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ItemTag, type: :model do
+  let(:item) { Item.new }
+  let(:tag) { Tag.new }
   subject {  described_class.new(
-    primary: true
+    primary: true,
+    item: item,
+    tag: tag
   )}
-   context 'validations' do
+  
+  context 'validations' do
     
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
@@ -19,5 +24,18 @@ RSpec.describe ItemTag, type: :model do
         non_primary_tag = ItemTag.new()
         expect(non_primary_tag.primary).to eq false
     end 
+  end
+
+  context 'associations' do
+    it 'belongs to a item' do
+      relation = ItemTag.reflect_on_association(:item)
+      expect(relation.macro).to eql(:belongs_to)
+    end
+
+    it 'belong to a tag' do
+      relation = ItemTag.reflect_on_association(:tag)
+      expect(relation.macro).to eql(:belongs_to)
+    end
+
   end
 end
