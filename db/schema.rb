@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_143046) do
+ActiveRecord::Schema.define(version: 2020_07_20_152533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,9 @@ ActiveRecord::Schema.define(version: 2020_07_20_143046) do
     t.string "style_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "styleable_type", null: false
+    t.bigint "styleable_id", null: false
+    t.index ["styleable_type", "styleable_id"], name: "index_styles_on_styleable_type_and_styleable_id"
   end
 
   create_table "tags", force: :cascade do |t|
