@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_140707) do
+ActiveRecord::Schema.define(version: 2020_07_20_143046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 2020_07_20_140707) do
     t.string "theme_class"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "themeable_type", null: false
+    t.bigint "themeable_id", null: false
+    t.index ["themeable_type", "themeable_id"], name: "index_themes_on_themeable_type_and_themeable_id"
   end
 
   create_table "users", force: :cascade do |t|
