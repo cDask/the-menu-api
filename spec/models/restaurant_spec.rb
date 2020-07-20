@@ -4,6 +4,8 @@ RSpec.describe Restaurant, type: :model do
   let(:user) { User.new }
   let(:contact_infos) { ContactInfo.new }
   let(:menus) { Menu.new }
+  let(:theme) { Theme.new }
+  let(:style) { Style.new }
   subject {described_class.new(
     name: 'Jacked Juice',
     subdomain: 'jackedjuice',
@@ -60,6 +62,16 @@ RSpec.describe Restaurant, type: :model do
 
     it 'has many menus' do 
       relation = Restaurant.reflect_on_association(:menus)
+      expect(relation.macro).to eql(:has_many)
+    end
+
+    it 'has one theme' do
+      relation = Restaurant.reflect_on_association(:theme)
+      expect(relation.macro).to eql(:has_one)
+    end
+
+    it 'has many styles' do
+      relation = Restaurant.reflect_on_association(:style)
       expect(relation.macro).to eql(:has_many)
     end
   end

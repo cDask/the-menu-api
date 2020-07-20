@@ -5,4 +5,6 @@ class Restaurant < ApplicationRecord
   belongs_to :user
   has_many :contact_infos
   has_many :menus
+  has_one :theme, as: :themeable
+  has_many :style, as: :styleable
 end
