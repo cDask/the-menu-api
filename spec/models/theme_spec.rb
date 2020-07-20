@@ -4,7 +4,7 @@ RSpec.describe Theme, type: :model do
   let(:item) { Item.new }
   subject { described_class.new(
     theme_class: 'menu-class-1',
-    item: item
+    themeable: item
   )}
 
   context 'validations' do
@@ -19,9 +19,6 @@ RSpec.describe Theme, type: :model do
   end
 
   context 'associations' do
-    it 'belongs to anything' do
-      relation = Theme.reflect_on_association(:item)
-      expect(relation.macro).to eql(:belongs_to)
-    end
+    it { should belong_to(:themeable) }
   end
 end

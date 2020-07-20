@@ -37,17 +37,6 @@ RSpec.describe Restaurant, type: :model do
       subject.opening_hours = 'hello'
       expect(subject).to_not be_valid
     end
-    
-    it 'subdomain is unique' do
-      #TODO check this one
-      subject2 = Restaurant.new(
-        name: 'jacked juice',
-        subdomain: 'jackedjuice',
-        opening_hours: "{'monday':[1100, 1300]}",
-        user: user
-      )
-      expect(subject2).to_not be_valid
-    end
   end
 
   context 'associations' do
@@ -75,5 +64,18 @@ RSpec.describe Restaurant, type: :model do
       relation = Restaurant.reflect_on_association(:style)
       expect(relation.macro).to eql(:has_many)
     end
+  end
+end
+
+RSpec.describe Restaurant, type: :model do
+  describe 'associations' do
+    it { should belong_to(:user).class_name('User') }
+  end
+
+  describe 'validations' do
+    let(:user) {User.create(email:"test@user", full_name: "test", password_digest: "password")}
+    subject { Restaurant.create(user: user) }
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:subdomain) }
   end
 end
