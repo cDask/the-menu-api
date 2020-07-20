@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ContactInfo, type: :model do
+  let(:restaurant) {Restaurant.new}
   subject {described_class.new(
     name: 'Phone Number',
     info_type: 'phone number',
-    info: "69696969669"
+    info: "69696969669",
+    restaurant: restaurant
   )}
   context 'validations' do
     it 'is valid with valid attributes' do 
@@ -31,5 +33,12 @@ RSpec.describe ContactInfo, type: :model do
       expect(subject).to_not be_valid
     end 
 
+  end
+
+  context 'associations' do
+    it 'belongs to a restaurant' do
+      relation = ContactInfo.reflect_on_association(:restaurant)
+      expect(relation.macro).to eql(:belongs_to)
+    end
   end
 end

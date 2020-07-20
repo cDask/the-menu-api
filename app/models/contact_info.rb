@@ -7,4 +7,5 @@ class ContactInfo < ApplicationRecord
     message: 'that is not a valid type'
   }
   validates :info_type, presence: true
+  belongs_to :restaurant
 end
