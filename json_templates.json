@@ -1,0 +1,26 @@
+{
+  {
+    "monday": [
+      [
+        "1100",
+        "1500"
+      ],
+      [
+        "1700",
+        "0000"
+      ]
+    ],
+    "tuesday": [],
+    "wednesday": [],
+    "thursday": [],
+    "friday": [],
+    "saturday": [],
+    "sunday": []
+  }
+  {
+    "headerColour": "#9a6159",
+    "textColour": "#492b65",
+    "backgroundColour": "",
+    "foregroundColour": ""
+  }
+}
