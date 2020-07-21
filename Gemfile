@@ -53,3 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "rubocop-rails", "~> 2.6"
 
 gem "aws-sdk-s3", "~> 1.74"
+gem "faker", "~> 2.13"

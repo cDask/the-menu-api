@@ -1,7 +1,103 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+p 'seeding 🌱'
+
+p 'users 🤷‍♂️'
+
+2.times do
+  user = User.create(
+    email: Faker::Internet.email,
+    password_digest: "8characters",
+    full_name: Faker::Name.name
+  )
+  p "#{user.full_name} has created an account"
+
+  # NOTE if seeding fails, it's because faker generated the same name, 
+  # restaurant model fails to validate name uniqueness
+  res_name = Faker::Cannabis.strain
+  res = Restaurant.create(
+    name: res_name,
+    user: user,
+    opening_hours: "{json string of opening hours}",
+    subdomain: res_name
+  )
+
+  ContactInfo.create(
+    name: "phone number",
+    info_type: "phone number",
+    info: Faker::PhoneNumber.phone_number.to_str,
+    restaurant: res
+  )
+  ContactInfo.create(
+    name: "Address",
+    info_type: "Address",
+    info: Faker::Address.full_address,
+    restaurant: res
+  )
+
+  Theme.create(
+    theme_class: ["minimal", "bold", "colourful"].sample,
+    themeable: res
+  )
+
+  Style.create(
+    style_data: "{json string of style data}",
+    styleable: res
+  )
+
+  p "and a Restaurant called #{res.name}, with the #{res.theme.theme_class} theme and a style of #{res.style.first.style_data}"
+
+  2.times do
+    menu = Menu.create(
+      title: ["lunch", "evening", "brunch"].sample,
+      restaurant: res
+    )
+    Theme.create(
+      theme_class: ["minimal", "bold", "colourful"].sample,
+      themeable: menu
+    )
+    Style.create(
+      style_data: "{json string of style data}",
+      styleable: menu
+    )
+    5.times do 
+      item = Item.create(
+        name: Faker::Food.dish,
+        description: Faker::Food.description,
+        menu: menu
+      )
+
+      tag = Tag.create(
+        name: ["takeaway available", "main", "entrée"].sample
+      )
+      ItemTag.create(
+        primary: true,
+        tag: tag,
+        item: item
+      )
+      2.times do 
+        tag = Tag.create(
+          name: ["vegetarian", "gluten free", "helfy"].sample
+        )
+        ItemTag.create(
+          tag: tag,
+          item: item
+        )
+      end
+
+      rand(4).times do 
+        Size.create(
+          name: ["hella big", "whoppa™", "bebe"].sample,
+          price: rand(1000..50000),
+          item: item
+        )
+      end
+
+      rand(5).times do 
+        Ingredient.create(
+          name: Faker::Food.ingredient,
+          item: item
+        )
+      end
+    end 
+    p "a #{menu.title} menu with #{menu.items.length} items. its theme is #{menu.theme.theme_class}"
+  end
+end
