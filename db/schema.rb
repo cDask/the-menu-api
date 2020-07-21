@@ -10,10 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_014853) do
+ActiveRecord::Schema.define(version: 2020_07_20_152533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_infos", force: :cascade do |t|
+    t.string "name"
+    t.string "info_type"
+    t.string "info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "restaurant_id", null: false
+    t.index ["restaurant_id"], name: "index_contact_infos_on_restaurant_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "item_id", null: false
+    t.index ["item_id"], name: "index_ingredients_on_item_id"
+  end
+
+  create_table "item_tags", force: :cascade do |t|
+    t.boolean "primary", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "item_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["item_id"], name: "index_item_tags_on_item_id"
+    t.index ["tag_id"], name: "index_item_tags_on_tag_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "menu_id", null: false
+    t.index ["menu_id"], name: "index_items_on_menu_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "restaurant_id", null: false
+    t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
+  end
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
@@ -21,6 +66,41 @@ ActiveRecord::Schema.define(version: 2020_07_20_014853) do
     t.string "opening_hours"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_restaurants_on_user_id"
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "item_id", null: false
+    t.index ["item_id"], name: "index_sizes_on_item_id"
+  end
+
+  create_table "styles", force: :cascade do |t|
+    t.string "style_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "styleable_type", null: false
+    t.bigint "styleable_id", null: false
+    t.index ["styleable_type", "styleable_id"], name: "index_styles_on_styleable_type_and_styleable_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "theme_class"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "themeable_type", null: false
+    t.bigint "themeable_id", null: false
+    t.index ["themeable_type", "themeable_id"], name: "index_themes_on_themeable_type_and_themeable_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +111,12 @@ ActiveRecord::Schema.define(version: 2020_07_20_014853) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "contact_infos", "restaurants"
+  add_foreign_key "ingredients", "items"
+  add_foreign_key "item_tags", "items"
+  add_foreign_key "item_tags", "tags"
+  add_foreign_key "items", "menus"
+  add_foreign_key "menus", "restaurants"
+  add_foreign_key "restaurants", "users"
+  add_foreign_key "sizes", "items"
 end

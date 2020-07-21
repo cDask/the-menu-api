@@ -1,11 +1,16 @@
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe Restaurant, type: :model do
+  let(:user) { User.new }
+  let(:contact_infos) { ContactInfo.new }
+  let(:menus) { Menu.new }
+  let(:theme) { Theme.new }
+  let(:style) { Style.new }
   subject {described_class.new(
     name: 'Jacked Juice',
     subdomain: 'jackedjuice',
-    opening_hours: "{'monday':[1100, 1300]}"
+    opening_hours: "{'monday':[1100, 1300]}",
+    user: user
   )}
 
   context 'validations' do
@@ -32,15 +37,47 @@ RSpec.describe Restaurant, type: :model do
       subject.opening_hours = 'hello'
       expect(subject).to_not be_valid
     end
-    
-    it 'subdomain is unique' do
-      #TODO check this one
-      subject2 = Restaurant.new(
-        name: 'jacked juice',
-        subdomain: 'jackedjuice',
-        opening_hours: ''
-      )
-      expect(subject2).to_not be_valid
+  end
+
+  context 'associations' do
+    it 'has an owner' do
+      relation = Restaurant.reflect_on_association(:user)
+      expect(relation.macro).to eql(:belongs_to)
     end
+
+    it 'has much contact info' do 
+      relation = Restaurant.reflect_on_association(:contact_infos)
+      expect(relation.macro).to eql(:has_many)
+    end
+
+    it 'has many menus' do 
+      relation = Restaurant.reflect_on_association(:menus)
+      expect(relation.macro).to eql(:has_many)
+    end
+
+    it 'has one theme' do
+      relation = Restaurant.reflect_on_association(:theme)
+      expect(relation.macro).to eql(:has_one)
+    end
+
+    it 'has many styles' do
+      relation = Restaurant.reflect_on_association(:style)
+      expect(relation.macro).to eql(:has_many)
+    end
+  end
+end
+
+
+# Shoulda Matches Tests
+RSpec.describe Restaurant, type: :model do
+  describe 'associations' do
+    it { should belong_to(:user).class_name('User') }
+  end
+
+  describe 'validations' do
+    let(:user) {User.create(email:"test@user", full_name: "test", password_digest: "password")}
+    subject { Restaurant.create(user: user) }
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:subdomain) }
   end
 end

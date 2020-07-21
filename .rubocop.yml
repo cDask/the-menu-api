@@ -15,6 +15,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - './*'
+  NewCops: enable
 
 Style/FrozenStringLiteralComment:
   Enabled: false
