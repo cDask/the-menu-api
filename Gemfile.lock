@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/nsarno/knock
+  revision: 9214cd027422df8dc31eb67c60032fbbf8fc100b
+  ref: 9214cd027422df8dc31eb67c60032fbbf8fc100b
+  branch: master
+  specs:
+    knock (2.2.0)
+      bcrypt (~> 3.1)
+      jwt (~> 2.2.1)
+      rails (>= 5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -73,6 +84,7 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.1)
       aws-eventstream (~> 1, >= 1.0.2)
+    bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -96,6 +108,7 @@ GEM
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -222,11 +235,13 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk-s3 (~> 1.74)
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   database_cleaner
   factory_bot_rails
   faker (~> 2.13)
+  knock!
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
