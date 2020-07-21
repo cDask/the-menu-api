@@ -28,3 +28,6 @@
 
 # Ignore SimpleCov reports
 /coverage/*
+
+# Ignore
+/spec/examples.txt
