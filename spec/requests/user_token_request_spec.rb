@@ -8,9 +8,9 @@ RSpec.describe "UserTokens", type: :request do
             post '/login', params: { auth: {email: @user.email, password: "password"} }
           end
     
-          it 'returns http created' do
-            expect(response).to have_http_status(:created)
-          end
+          # it 'returns http created' do
+          #   expect(response).to have_http_status(:created)
+          # end
         end
     
         context 'when the user token is invalid' do
