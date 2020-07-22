@@ -7,4 +7,5 @@ class Item < ApplicationRecord
   has_many :tags, through: :item_tags
   has_one :theme, as: :themable
   has_many :styles, as: :styleable
+  has_one_attached :picture
 end

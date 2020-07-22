@@ -17,5 +17,4 @@ class Restaurant < ApplicationRecord
     subdomain ||= name
     self.subdomain = subdomain.downcase.gsub(' ', '') if subdomain
   end
-
 end
