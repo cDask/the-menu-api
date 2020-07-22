@@ -3,9 +3,8 @@ require 'rails_helper'
 RSpec.describe "Restaurants", type: :request do
     describe 'GET #index' do
         before(:example) do
-          @first_restaurant = create(:restaurant)
-          @last_restaurant = create(:restaurant)
-          get '/restaurants', headers: authenticated_header
+          @user = user_with_restaurants
+          get '/restaurants', headers: authenticated_header(@user)
           @json_response = JSON.parse(response.body)
         end
     
@@ -14,15 +13,15 @@ RSpec.describe "Restaurants", type: :request do
         end
     
         it 'JSON response contains the correct number of entries' do
-          expect(@json_response['restaurant'].count).to eq(1)
+          expect(@json_response.count).to eq(2)
         end
     
         it 'JSON response body contains expected attributes' do
-          expect(@json_response['trails'][0]).to include({
-            'id' => @first_restaurant.id,
-            'name' => @first_restaurant.name,
-            'opening_hours' => @first_restaurant.opening_hours,
-            'subdomain' => @first_restaurant.subdomain
+          expect(@json_response[0]).to include({
+            'id' => @user.restaurants[0].id,
+            'name' => @user.restaurants[0].name,
+            'opening_hours' => @user.restaurants[0].opening_hours,
+            'subdomain' => @user.restaurants[0].subdomain
           }) 
         end
     end

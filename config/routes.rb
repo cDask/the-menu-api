@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get "/status", to: "status#index"
   get "/status/user", to: "status#user"
+
+  resources :restaurants
 end
