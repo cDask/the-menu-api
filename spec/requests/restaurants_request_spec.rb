@@ -62,5 +62,35 @@ RSpec.describe "Restaurants", type: :request do
         expect(@json_response['errors'][0]).to eq("Name can't be blank")
       end
     end
-  end    
+  end
+  
+  describe 'PUT #update' do
+    context 'when the restaurant attribute is valid' do 
+      before(:example)do
+        @restaurant = create(:restaurant)
+        put "/restaurants/#{@restaurant.id}",params: { restaurant: {opening_hours: "{Monday}"} }, headers: authenticated_header
+      end
+
+      it 'has a http no content response status' do
+        expect(response).to have_http_status(:no_content)
+      end
+
+      it 'updates the opening hours in the database' do
+        expect(Address.find(@restaurant.id).opening_hours).to eq("{Monday}")
+      end
+    end   
+    context 'when the restaurant attribute is invalid' do
+      before(:example) do
+        @restaurant = create(:restaurant)
+          put "/restaurants/#{@restaurant.id}",params: { restaurant: {opening_hours: nil} }, headers: authenticated_header()
+        @json_response = JSON.parse(response.body)
+      end
+      it 'returns an unprocessable entity response ' do 
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+      it 'has the correct number of errors'do
+        expect(@json_response['errors'].count).to eq(1)
+      end
+    end
+  end 
 end
