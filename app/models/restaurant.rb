@@ -12,10 +12,10 @@ class Restaurant < ApplicationRecord
   has_many :style, as: :styleable
 
   private
-    def create_subdomain
-      if !self.subdomain
-        self.subdomain = self.name
-      end
-      self.subdomain = self.subdomain.downcase.gsub(" ", "")
-    end
+
+  def create_subdomain
+    subdomain ||= name
+    self.subdomain = subdomain.downcase.gsub(' ', '') if subdomain
+  end
+
 end
