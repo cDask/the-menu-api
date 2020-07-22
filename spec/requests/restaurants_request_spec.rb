@@ -31,7 +31,7 @@ RSpec.describe "Restaurants", type: :request do
     context 'when the restaurant is valid' do
       before(:example) do
         @restaurant_params = attributes_for(:restaurant)
-        post '/restaurants', params: { restaurant: @restaurant_params }
+        post '/restaurants', params: { restaurant: @restaurant_params }, headers: authenticated_header
       end
   
       it 'returns http created' do
@@ -45,7 +45,7 @@ RSpec.describe "Restaurants", type: :request do
     context 'when the restaurant has invalid attributes' do
       before(:example) do
         @restaurant_params = attributes_for(:restaurant, :invalid_name)
-        post '/restaurants', params: { restaurant: @restaurant_params }
+        post '/restaurants', params: { restaurant: @restaurant_params }, headers: authenticated_header
         @json_response = JSON.parse(response.body)
       end
   
@@ -54,7 +54,8 @@ RSpec.describe "Restaurants", type: :request do
       end
   
       it 'returns the correct number of errors' do
-        expect(@json_response['errors'].count).to eq(1)
+        pp @json_response['errors']
+        expect(@json_response['errors'].count).to eq(2)
       end
   
       it 'errors contains the correct message' do
