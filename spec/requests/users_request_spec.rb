@@ -21,7 +21,7 @@ RSpec.describe "Users", type: :request do
           before(:example) do
             @user_params = attributes_for(:user, :invalid)
             post '/sign-up', params: { user: @user_params }
-            @json_response = JSON.parse(response.body)
+            # @json_response = JSON.parse(response.body)
           end
     
           it 'returns status unprocessable entity' do
