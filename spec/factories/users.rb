@@ -21,6 +21,9 @@ FactoryBot.define do
   trait :invalid do
       email { nil }
   end
+  trait :invalid_name do
+    name { nil }
+  end
 end
 
 def user_with_restaurants(restaurant_count: 2)
