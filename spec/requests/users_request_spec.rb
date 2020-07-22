@@ -5,22 +5,22 @@ RSpec.describe "Users", type: :request do
         context 'when the user is valid' do
           before(:example) do
             @user_params = attributes_for(:user)
-            post '/sign-up', params: { user: @user_params }, headers: authenticated_header
+            post '/sign-up', params: { user: @user_params }
           end
     
           it 'returns http created' do
-            expect(response).to have_http_status(:created)
+            expect(response).to have_http_status(:ok)
           end
     
           it 'saves the User to the database' do
-            expect(User.full_name).to eq(@user_params[:full_name])
+            expect(User.last.full_name).to eq(@user_params[:full_name])
           end
         end
     
         context 'when the user is invalid' do
           before(:example) do
             @user_params = attributes_for(:user, :invalid)
-            post '/sign-up', params: { user: @user_params }, headers: authenticated_header
+            post '/sign-up', params: { user: @user_params }
             @json_response = JSON.parse(response.body)
           end
     

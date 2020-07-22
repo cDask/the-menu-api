@@ -1,5 +1,5 @@
 class Restaurant < ApplicationRecord
-  # before_validation :create_subdomain
+  before_validation :create_subdomain
 
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true
@@ -12,7 +12,8 @@ class Restaurant < ApplicationRecord
   has_many :style, as: :styleable
 
   # def create_subdomain
-  #   self.subdomain = (name unless subdomain)
-  #   self.subdomain = subdomain.downcase.gsub(' ', '') if subdomain
+  #   p subdomain
+  #   subdomain ||= name
+  #   # subdomain.gsub(' ', '')
   # end
 end

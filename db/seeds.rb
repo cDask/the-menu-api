@@ -5,7 +5,7 @@ p 'users 🤷‍♂️'
 2.times do
   user = User.create(
     email: Faker::Internet.email,
-    password_digest: "8characters",
+    password: "8characters",
     full_name: Faker::Name.name
   )
   p "#{user.full_name} has created an account"
