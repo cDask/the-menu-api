@@ -11,9 +11,11 @@ class Restaurant < ApplicationRecord
   has_one :theme, as: :themeable
   has_many :style, as: :styleable
 
-  # def create_subdomain
-  #   p subdomain
-  #   subdomain ||= name
-  #   # subdomain.gsub(' ', '')
-  # end
+  private
+
+  def create_subdomain
+    subdomain ||= name
+    self.subdomain = subdomain.downcase.gsub(' ', '') if subdomain
+  end
+
 end
