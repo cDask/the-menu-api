@@ -14,7 +14,8 @@ class Restaurant < ApplicationRecord
   private
 
   def create_subdomain
-    self.subdomain = name unless subdomain
-    self.subdomain = subdomain.downcase.gsub(' ', '')
+    subdomain ||= name
+    self.subdomain = subdomain.downcase.gsub(' ', '') if subdomain
   end
+
 end

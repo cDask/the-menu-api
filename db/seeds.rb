@@ -5,7 +5,7 @@ p 'users 🤷‍♂️'
 2.times do
   user = User.create(
     email: Faker::Internet.email,
-    password_digest: "8characters",
+    password: "8characters",
     full_name: Faker::Name.name
   )
   p "#{user.full_name} has created an account"
@@ -13,7 +13,7 @@ p 'users 🤷‍♂️'
   # NOTE if seeding fails, it's because faker generated the same name, 
   # restaurant model fails to validate name uniqueness
   res_name = Faker::Cannabis.strain
-  res = Restaurant.create(
+ p res = Restaurant.create(
     name: res_name,
     user: user,
     opening_hours: "{json string of opening hours}",
