@@ -30,6 +30,11 @@ FactoryBot.define do
   factory :tag do
     name { "Vegetarian "}
   end
+
+  factory :ingredient do
+    name { "Banana" }
+    item
+  end
   
   trait :existing do
       email { "test@user.com"}
