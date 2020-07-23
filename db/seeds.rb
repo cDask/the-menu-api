@@ -13,7 +13,7 @@ p 'users 🤷‍♂️'
   # NOTE if seeding fails, it's because faker generated the same name, 
   # restaurant model fails to validate name uniqueness
   res_name = Faker::Cannabis.strain
- p res = Restaurant.create(
+  res = Restaurant.create(
     name: res_name,
     user: user,
     opening_hours: "{json string of opening hours}",
@@ -39,7 +39,12 @@ p 'users 🤷‍♂️'
   )
 
   Style.create(
-    style_data: "{json string of style data}",
+    style_data: "{
+    'headerColour': #{Faker::Color.hex_color},
+    'textColour': #{Faker::Color.hex_color},
+    'backgroundColour': #{Faker::Color.hex_color},
+    'foregroundColour': #{Faker::Color.hex_color} 
+    }",
     styleable: res
   )
 
@@ -55,8 +60,13 @@ p 'users 🤷‍♂️'
       themeable: menu
     )
     Style.create(
-      style_data: "{json string of style data}",
-      styleable: menu
+      style_data: "{
+        'headerColour': #{Faker::Color.hex_color},
+        'textColour': #{Faker::Color.hex_color},
+        'backgroundColour': #{Faker::Color.hex_color},
+        'foregroundColour': #{Faker::Color.hex_color} 
+        }",
+      styleable: res
     )
     5.times do 
       item = Item.create(
