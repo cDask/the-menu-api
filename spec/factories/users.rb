@@ -26,6 +26,10 @@ FactoryBot.define do
     description { "This is an item" }
     menu
   end
+
+  factory :tag do
+    name { "Vegetarian "}
+  end
   
   trait :existing do
       email { "test@user.com"}
