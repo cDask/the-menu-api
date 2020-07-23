@@ -4,7 +4,7 @@ class ThemesController < ApplicationController
 
   def create
     theme = Theme.new(theme_params)
-    theme.themeable_type = params[:themable_type]
+    theme.themeable_type = params[:themeable_type]
     theme.themeable_id = params[:themeable_id]
 
     if theme.save

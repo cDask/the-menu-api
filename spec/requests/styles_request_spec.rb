@@ -14,7 +14,7 @@ RSpec.describe "Styles", type: :request do
 			end
 	
 			it 'saves the style to the database' do
-				expect(Style.last.style_class).to eq(@style_params[:style_class])
+				expect(Style.last.style_data).to eq(@style_params[:style_data])
 			end
 		end
 		context 'when the style has invalid attributes' do
@@ -30,7 +30,7 @@ RSpec.describe "Styles", type: :request do
 			end
 	
 			it 'returns the correct number of errors' do
-				expect(@json_response['errors'].count).to eq(1)
+				expect(@json_response['errors'].count).to eq(2)
 			end
 	
 			it 'errors contains the correct message' do
@@ -64,7 +64,7 @@ RSpec.describe "Styles", type: :request do
 				expect(response).to have_http_status(:unprocessable_entity)
 			end
 			it 'has the correct number of errors'do
-				expect(@json_response['errors'].count).to eq(1)
+				expect(@json_response['errors'].count).to eq(2)
 			end
 		end
 	end

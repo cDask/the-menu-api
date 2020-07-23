@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
   resources :tags, only: [:index,:create]
   resources :themes, only: [:show, :create, :update, :destroy]
+  resources :styles, only: [:show, :create, :update, :destroy]
 end
