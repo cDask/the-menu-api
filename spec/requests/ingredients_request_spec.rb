@@ -59,7 +59,7 @@ RSpec.describe "Ingredients", type: :request do
     context 'when the ingredient attribute is invalid' do
       before(:example) do
         @ingredient = create(:ingredient)
-          put "/items/#{@ingredient.item_id}/ingredients/#{@ingredient.id}",params: { ingredient: {name: nil} }, headers: authenticated_header()
+        put "/items/#{@ingredient.item_id}/ingredients/#{@ingredient.id}",params: { ingredient: {name: nil} }, headers: authenticated_header()
         @json_response = JSON.parse(response.body)
       end
       it 'returns an unprocessable entity response ' do

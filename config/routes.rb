@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :menus, only: [:create, :update, :destroy]
   end
 
-  resources :items, only: [:create, :update, :destroy]
+  resources :items do
+    resources :ingredients, only: [:create, :update, :destroy]
+  end
   resources :tags, only: [:index,:create]
 end
