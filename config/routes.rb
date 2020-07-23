@@ -16,4 +16,5 @@ Rails.application.routes.draw do
     resources :sizes, only: [:create, :update, :destroy]
   end
   resources :tags, only: [:index,:create]
+  resources :themes, only: [:show, :create, :update, :destroy]
 end

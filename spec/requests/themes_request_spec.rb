@@ -6,7 +6,7 @@ RSpec.describe "Themes", type: :request do
 			before(:example) do
 				@theme_params = attributes_for(:theme)
 				menu = create(:menu)
-				post "/themes", params: { theme: @theme_params, menu_id: menu.id }, headers: authenticated_header
+				post "/themes", params: { theme: @theme_params, themeable_id: menu.id, themable_type: "Menu" }, headers: authenticated_header
 			end
 	
 			it 'returns http created' do
@@ -14,14 +14,14 @@ RSpec.describe "Themes", type: :request do
 			end
 	
 			it 'saves the theme to the database' do
-				expect(Theme.last.name).to eq(@theme_params[:name])
+				expect(Theme.last.theme_class).to eq(@theme_params[:theme_class])
 			end
 		end
 		context 'when the theme has invalid attributes' do
 			before(:example) do
 				@theme_params = attributes_for(:theme, :invalid_theme_class)
 				menu = create(:menu)
-				post "/themes", params: { theme: @theme_params, menu_id: menu.id }, headers: authenticated_header
+				post "/themes", params: { theme: @theme_params, themeable_id: menu.id, themable_type: "Menu" }, headers: authenticated_header
 				@json_response = JSON.parse(response.body)
 			end
 	
@@ -51,7 +51,7 @@ RSpec.describe "Themes", type: :request do
 			end
 
 			it 'updates the opening hours in the database' do
-				expect(Theme.find(@theme.id).name).to eq("Test")
+				expect(Theme.find(@theme.id).theme_class).to eq("bold")
 			end
 		end   
 		context 'when the theme attribute is invalid' do
