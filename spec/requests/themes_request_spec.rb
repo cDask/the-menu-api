@@ -21,7 +21,7 @@ RSpec.describe "Themes", type: :request do
 			before(:example) do
 				@theme_params = attributes_for(:theme, :invalid_theme_class)
 				menu = create(:menu)
-				post "/themes", params: { theme: @theme_params, themeable_id: menu.id, themable_type: "Menu" }, headers: authenticated_header
+				post "/themes", params: { theme: @theme_params, themeable_id: menu.id, themeable_type: "Menu" }, headers: authenticated_header
 				@json_response = JSON.parse(response.body)
 			end
 	
@@ -30,7 +30,7 @@ RSpec.describe "Themes", type: :request do
 			end
 	
 			it 'returns the correct number of errors' do
-				expect(@json_response['errors'].count).to eq(1)
+				expect(@json_response['errors'].count).to eq(2)
 			end
 	
 			it 'errors contains the correct message' do

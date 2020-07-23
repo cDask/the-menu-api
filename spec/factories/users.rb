@@ -54,8 +54,17 @@ FactoryBot.define do
     themeable { association :item }
   end
 
+  factory :style do
+    style_data { "{ background: '#FFFFFF' }" }
+    styleable { association :item }
+  end
+
   trait :invalid_theme_class do
     theme_class { nil }
+  end
+
+  trait :invalid_style_data do
+    style_data { nil }
   end
   
   trait :existing do
