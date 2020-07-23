@@ -15,6 +15,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - './*'
+    - 'app/views/restaurants/*'
   NewCops: enable
 
 Style/FrozenStringLiteralComment:
