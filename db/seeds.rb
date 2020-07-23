@@ -48,7 +48,12 @@ p 'users 🤷‍♂️'
   )
 
   Style.create(
-    style_data: "{json string of style data}",
+    style_data: "{
+    'headerColour': #{Faker::Color.hex_color},
+    'textColour': #{Faker::Color.hex_color},
+    'backgroundColour': #{Faker::Color.hex_color},
+    'foregroundColour': #{Faker::Color.hex_color} 
+    }",
     styleable: res
   )
 
@@ -64,8 +69,13 @@ p 'users 🤷‍♂️'
       themeable: menu
     )
     Style.create(
-      style_data: "{json string of style data}",
-      styleable: menu
+      style_data: "{
+        'headerColour': #{Faker::Color.hex_color},
+        'textColour': #{Faker::Color.hex_color},
+        'backgroundColour': #{Faker::Color.hex_color},
+        'foregroundColour': #{Faker::Color.hex_color} 
+        }",
+      styleable: res
     )
     5.times do 
       item = Item.create(
