@@ -30,6 +30,10 @@ FactoryBot.define do
       email { nil }
   end
 
+  trait :invalid_title do
+    title { nil }
+  end
+
   trait :invalid_name do
     name { nil }
   end
