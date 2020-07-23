@@ -3,6 +3,7 @@ json.restaurants do
     json.id restaurant.id
     json.name restaurant.name
     json.subdomain restaurant.subdomain
+    json.opening_hours restaurant.opening_hours
     json.created_at restaurant.created_at
     json.updated_at restaurant.updated_at
 

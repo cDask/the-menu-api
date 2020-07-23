@@ -5,10 +5,10 @@ RSpec.describe "Restaurants", type: :request do
       before(:example) do
         user = user_with_restaurants
         @first_restaurant = user.restaurants.first
-        get '/restaurants', headers: authenticated_header(user)
+        get '/restaurants.json', headers: authenticated_header(user)
         @json_response = JSON.parse(response.body)
       end
-  
+      
       it 'returns http success' do
         expect(response).to have_http_status(:success)
       end
