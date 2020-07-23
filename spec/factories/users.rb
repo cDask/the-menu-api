@@ -21,6 +21,13 @@ FactoryBot.define do
     restaurant
   end
 
+  factory :contact_info do
+    name { "Location" }
+    info_type { 'link' }
+    info { "google.com" }
+    restaurant
+  end
+
   factory :item do
     name { "Item" }
     description { "This is an item" }
