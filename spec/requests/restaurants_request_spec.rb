@@ -76,7 +76,7 @@ RSpec.describe "Restaurants", type: :request do
       end
 
       it 'updates the opening hours in the database' do
-        expect(Address.find(@restaurant.id).opening_hours).to eq("{Monday}")
+        expect(Restaurant.find(@restaurant.id).opening_hours).to eq("{Monday}")
       end
     end   
     context 'when the restaurant attribute is invalid' do
@@ -89,7 +89,7 @@ RSpec.describe "Restaurants", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
       end
       it 'has the correct number of errors'do
-        expect(@json_response['errors'].count).to eq(1)
+        expect(@json_response['errors'].count).to eq(2)
       end
     end
   end 
