@@ -1,8 +1,14 @@
 class RestaurantsController < ApplicationController
   before_action :authenticate_user
   def index
-    restaurants = current_user.restaurants
-    render json: { restaurants: restaurants }, status: :ok
+    restaurants = current_user.restaurants.includes(:contact_infos, :theme, :style, menus: [:items])
+    restaurants_records_with_associations = restaurants.map do |record|
+      record.attributes.merge(
+        'menus' => record.menus,
+        'theme' => record.theme
+      )
+    end
+    render json: { restaurants: restaurants_records_with_associations }, status: :ok
   end
 
   def create
