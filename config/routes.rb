@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :restaurants do
     resources :menus, only: [:create, :update, :destroy]
+    resources :contact_infos, only: [:create, :update, :destroy]
   end
 
   resources :items do

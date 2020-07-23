@@ -14,12 +14,12 @@ RSpec.describe "ContactInfos", type: :request do
       end
   
       it 'saves the contact_info to the database' do
-        expect(ContactInfo.last.title).to eq(@contact_info_params[:title])
+        expect(ContactInfo.last.name).to eq(@contact_info_params[:name])
       end
     end
     context 'when the contact_info has invalid attributes' do
       before(:example) do
-        @contact_info_params = attributes_for(:contact_info, :invalid_title)
+        @contact_info_params = attributes_for(:contact_info, :invalid_name)
         @restaurant = create(:restaurant)
         post "/restaurants/#{@restaurant.id}/contact_infos", params: { contact_info: @contact_info_params }, headers: authenticated_header
         @json_response = JSON.parse(response.body)
@@ -35,7 +35,7 @@ RSpec.describe "ContactInfos", type: :request do
       end
   
       it 'errors contains the correct message' do
-        expect(@json_response['errors'][0]).to eq("Title can't be blank")
+        expect(@json_response['errors'][0]).to eq("Name can't be blank")
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe "ContactInfos", type: :request do
     context 'when the contact info has attributes are valid' do 
       before(:example)do
         @contact_info = create(:contact_info)
-        put "/restaurants/#{@contact_info.restaurant_id}/contact_infos/#{@contact_info.id}",params: { contact_info: {title: "Test"} }, headers: authenticated_header
+        put "/restaurants/#{@contact_info.restaurant_id}/contact_infos/#{@contact_info.id}",params: { contact_info: {name: "Test"} }, headers: authenticated_header
       end
 
       it 'has a http no content response status' do
@@ -52,13 +52,13 @@ RSpec.describe "ContactInfos", type: :request do
       end
 
       it 'updates the opening hours in the database' do
-        expect(ContactInfo.find(@contact_info.id).title).to eq("Test")
+        expect(ContactInfo.find(@contact_info.id).name).to eq("Test")
       end
     end   
     context 'when the contact_info attribute is invalid' do
       before(:example) do
         @contact_info = create(:contact_info)
-          put "/restaurants/#{@contact_info.restaurant_id}/contact_infos/#{@contact_info.id}",params: { contact_info: {title: nil} }, headers: authenticated_header()
+          put "/restaurants/#{@contact_info.restaurant_id}/contact_infos/#{@contact_info.id}",params: { contact_info: {name: nil} }, headers: authenticated_header()
         @json_response = JSON.parse(response.body)
       end
       it 'returns an unprocessable entity response ' do
