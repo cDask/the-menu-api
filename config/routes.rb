@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :ingredients, only: [:create, :update, :destroy]
+    resources :sizes, only: [:create, :update, :destroy]
   end
   resources :tags, only: [:index,:create]
 end
