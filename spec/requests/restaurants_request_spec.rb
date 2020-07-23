@@ -92,5 +92,20 @@ RSpec.describe "Restaurants", type: :request do
         expect(@json_response['errors'].count).to eq(2)
       end
     end
-  end 
+  end
+  
+  describe 'DELETE #destroy' do
+    before(:example) do
+      restaurant = create(:restaurant)
+      delete "/restaurant/#{restaurant.id}", headers: authenticated_header
+    end
+
+    it 'has a http no content response status' do
+      expect(response).to have_http_status(:no_content)
+    end
+
+    it 'removes the trail from the database' do
+      expect(Restaurant.count).to eq(0)
+    end
+  end
 end
