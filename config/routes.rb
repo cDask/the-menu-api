@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
 
   resources :items, only: [:create, :update, :destroy]
+  resources :tags, only: [:index,:create]
 end

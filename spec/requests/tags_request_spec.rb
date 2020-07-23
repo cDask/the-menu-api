@@ -5,7 +5,8 @@ RSpec.describe "Tags", type: :request do
         before(:example) do
           @first_tag = create(:tag)
           @last_tag = create(:tag)
-          get '/tags.json', headers: authenticated_header(user)
+          user = create(:user)
+          get '/tags', headers: authenticated_header(user)
           @json_response = JSON.parse(response.body)
         end
         
@@ -52,8 +53,7 @@ RSpec.describe "Tags", type: :request do
         end
     
         it 'returns the correct number of errors' do
-          pp @json_response['errors']
-          expect(@json_response['errors'].count).to eq(2)
+          expect(@json_response['errors'].count).to eq(1)
         end
     
         it 'errors contains the correct message' do
