@@ -20,6 +20,12 @@ FactoryBot.define do
     title { "Main menu" }
     restaurant
   end
+
+  factory :item do
+    name { "Item" }
+    description { "This is an item" }
+    menu
+  end
   
   trait :existing do
       email { "test@user.com"}
@@ -28,6 +34,10 @@ FactoryBot.define do
 
   trait :invalid do
       email { nil }
+  end
+
+  trait :invalid_title do
+    title { nil }
   end
 
   trait :invalid_name do

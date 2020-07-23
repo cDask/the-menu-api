@@ -5,10 +5,10 @@ RSpec.describe "Restaurants", type: :request do
       before(:example) do
         user = user_with_restaurants
         @first_restaurant = user.restaurants.first
-        get '/restaurants', headers: authenticated_header(user)
+        get '/restaurants.json', headers: authenticated_header(user)
         @json_response = JSON.parse(response.body)
       end
-  
+      
       it 'returns http success' do
         expect(response).to have_http_status(:success)
       end
@@ -38,7 +38,7 @@ RSpec.describe "Restaurants", type: :request do
         expect(response).to have_http_status(:created)
       end
   
-      it 'saves the Trail to the database' do
+      it 'saves the restaurant to the database' do
         expect(Restaurant.last.name).to eq(@restaurant_params[:name])
       end
     end
@@ -104,7 +104,7 @@ RSpec.describe "Restaurants", type: :request do
       expect(response).to have_http_status(:no_content)
     end
 
-    it 'removes the trail from the database' do
+    it 'removes the restaurant from the database' do
       expect(Restaurant.count).to eq(0)
     end
   end
