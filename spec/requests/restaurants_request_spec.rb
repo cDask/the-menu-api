@@ -97,7 +97,7 @@ RSpec.describe "Restaurants", type: :request do
   describe 'DELETE #destroy' do
     before(:example) do
       restaurant = create(:restaurant)
-      delete "/restaurant/#{restaurant.id}", headers: authenticated_header
+      delete "/restaurants/#{restaurant.id}", headers: authenticated_header
     end
 
     it 'has a http no content response status' do

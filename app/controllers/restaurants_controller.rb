@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_restaurant, only: %i[update]
+  before_action :set_restaurant, only: %i[update destroy]
 
   def index
     restaurants = current_user.restaurants.includes(:contact_infos, :theme, :style, menus: [:items])
@@ -29,6 +29,11 @@ class RestaurantsController < ApplicationController
       render json: { errors: @restaurant.errors.full_messages },
              status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @restaurant.delete
+    render json: {}, status: :no_content
   end
 
   private
