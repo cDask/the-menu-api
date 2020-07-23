@@ -35,6 +35,12 @@ FactoryBot.define do
     name { "Banana" }
     item
   end
+
+  factory :size do
+    name { "Glass" }
+    price { 1000 }
+    item
+  end
   
   trait :existing do
       email { "test@user.com"}
