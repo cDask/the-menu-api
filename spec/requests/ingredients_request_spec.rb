@@ -31,7 +31,6 @@ RSpec.describe "Ingredients", type: :request do
       end
   
       it 'returns the correct number of errors' do
-        pp @json_response['errors']
         expect(@json_response['errors'].count).to eq(1)
       end
   

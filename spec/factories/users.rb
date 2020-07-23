@@ -48,6 +48,15 @@ FactoryBot.define do
     price { 1000 }
     item
   end
+
+  factory :theme do
+    theme_class { "minimal" }
+    themeable { association :item }
+  end
+
+  trait :invalid_theme_class do
+    theme_class { nil }
+  end
   
   trait :existing do
       email { "test@user.com"}

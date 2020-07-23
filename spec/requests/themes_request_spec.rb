@@ -1,27 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe "Items", type: :request do
-	describe 'POST #create' do
-		context 'when the item is valid' do
+RSpec.describe "Themes", type: :request do
+  describe 'POST #create' do
+		context 'when the theme is valid' do
 			before(:example) do
-				@item_params = attributes_for(:item)
+				@theme_params = attributes_for(:theme)
 				menu = create(:menu)
-				post "/items", params: { item: @item_params, menu_id: menu.id }, headers: authenticated_header
+				post "/themes", params: { theme: @theme_params, menu_id: menu.id }, headers: authenticated_header
 			end
 	
 			it 'returns http created' do
 				expect(response).to have_http_status(:created)
 			end
 	
-			it 'saves the item to the database' do
-				expect(Item.last.name).to eq(@item_params[:name])
+			it 'saves the theme to the database' do
+				expect(Theme.last.name).to eq(@theme_params[:name])
 			end
 		end
-		context 'when the item has invalid attributes' do
+		context 'when the theme has invalid attributes' do
 			before(:example) do
-				@item_params = attributes_for(:item, :invalid_name)
+				@theme_params = attributes_for(:theme, :invalid_theme_class)
 				menu = create(:menu)
-				post "/items", params: { item: @item_params, menu_id: menu.id }, headers: authenticated_header
+				post "/themes", params: { theme: @theme_params, menu_id: menu.id }, headers: authenticated_header
 				@json_response = JSON.parse(response.body)
 			end
 	
@@ -34,16 +34,16 @@ RSpec.describe "Items", type: :request do
 			end
 	
 			it 'errors contains the correct message' do
-				expect(@json_response['errors'][0]).to eq("Name can't be blank")
+				expect(@json_response['errors'][0]).to eq("Theme class can't be blank")
 			end
 		end
 	end
 	
 	describe 'PUT #update' do
-		context 'when the item attribute is valid' do 
+		context 'when the theme attribute is valid' do 
 			before(:example)do
-				@item = create(:item)
-				put "/items/#{@item.id}",params: { item: {name: "Test"} }, headers: authenticated_header
+				@theme = create(:theme)
+				put "/themes/#{@theme.id}",params: { theme: {theme_class: "bold"} }, headers: authenticated_header
 			end
 
 			it 'has a http no content response status' do
@@ -51,13 +51,13 @@ RSpec.describe "Items", type: :request do
 			end
 
 			it 'updates the opening hours in the database' do
-				expect(Item.find(@item.id).name).to eq("Test")
+				expect(Theme.find(@theme.id).name).to eq("Test")
 			end
 		end   
-		context 'when the item attribute is invalid' do
+		context 'when the theme attribute is invalid' do
 			before(:example) do
-				@item = create(:item)
-					put "/items/#{@item.id}",params: { item: {name: nil} }, headers: authenticated_header()
+				@theme = create(:theme)
+					put "/themes/#{@theme.id}",params: { theme: {theme_class: nil} }, headers: authenticated_header()
 				@json_response = JSON.parse(response.body)
 			end
 			it 'returns an unprocessable entity response ' do
@@ -71,16 +71,16 @@ RSpec.describe "Items", type: :request do
 	
 	describe 'DELETE #destroy' do
 		before(:example) do
-			item = create(:item)
-			delete "/items/#{item.id}", headers: authenticated_header
+			theme = create(:theme)
+			delete "/themes/#{theme.id}", headers: authenticated_header
 		end
 
 		it 'has a http no content response status' do
 			expect(response).to have_http_status(:no_content)
 		end
 
-		it 'removes the item from the database' do
-			expect(Item.count).to eq(0)
+		it 'removes the theme from the database' do
+			expect(Theme.count).to eq(0)
 		end
 	end
 end
