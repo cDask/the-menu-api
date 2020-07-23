@@ -41,3 +41,15 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+# Shoulda Matches Tests
+RSpec.describe User, type: :model do
+  subject { described_class.new(
+    email: 'user@test.com',
+    password_digest: 'password',
+    full_name: 'Test User'
+  )}
+  describe 'validations' do
+    it { should validate_uniqueness_of(:email) }
+  end
+end
