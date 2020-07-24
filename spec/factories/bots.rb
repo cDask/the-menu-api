@@ -13,6 +13,7 @@ FactoryBot.define do
        "#{n} Test Name"
     end
     opening_hours { "{}" }
+    subdomain { "testname" }
     user
   end
 

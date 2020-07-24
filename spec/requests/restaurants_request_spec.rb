@@ -31,7 +31,7 @@ RSpec.describe "Restaurants", type: :request do
     before(:example) do
       user = user_with_restaurants
       @first_restaurant = user.restaurants.first
-      get "/restaurants/#{@first_restaurant.id}.json", headers: authenticated_header(user)
+      get "/getrestaurants/#{@first_restaurant.subdomain}.json", headers: authenticated_header(user)
       @json_response = JSON.parse(response.body)
     end
     
@@ -39,12 +39,8 @@ RSpec.describe "Restaurants", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'JSON response contains the correct number of entries' do
-      expect(@json_response['restaurants'].count).to eq(2)
-    end
-
     it 'JSON response body contains expected attributes' do
-      expect(@json_response['restaurants'][0]).to include({
+      expect(@json_response['restaurant']).to include({
         'id' => @first_restaurant.id,
         'name' => @first_restaurant.name,
         'opening_hours' => @first_restaurant.opening_hours,
@@ -80,7 +76,7 @@ RSpec.describe "Restaurants", type: :request do
       end
   
       it 'returns the correct number of errors' do
-        expect(@json_response['errors'].count).to eq(2)
+        expect(@json_response['errors'].count).to eq(1)
       end
   
       it 'errors contains the correct message' do

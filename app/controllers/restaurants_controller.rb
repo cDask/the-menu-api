@@ -1,9 +1,13 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:show]
   before_action :set_restaurant, only: %i[update destroy]
 
   def index
     @restaurants = current_user.restaurants.includes(:contact_infos, :theme, :style, menus: [:items])
+  end
+
+  def show
+    @restaurant = Restaurant.find_by_subdomain(params[:subdomain])
   end
 
   def create
