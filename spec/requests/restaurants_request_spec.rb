@@ -27,6 +27,32 @@ RSpec.describe "Restaurants", type: :request do
       end
   end
 
+  describe 'GET #show' do
+    before(:example) do
+      user = user_with_restaurants
+      @first_restaurant = user.restaurants.first
+      get "/restaurants/#{@first_restaurant.id}.json", headers: authenticated_header(user)
+      @json_response = JSON.parse(response.body)
+    end
+    
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'JSON response contains the correct number of entries' do
+      expect(@json_response['restaurants'].count).to eq(2)
+    end
+
+    it 'JSON response body contains expected attributes' do
+      expect(@json_response['restaurants'][0]).to include({
+        'id' => @first_restaurant.id,
+        'name' => @first_restaurant.name,
+        'opening_hours' => @first_restaurant.opening_hours,
+        'subdomain' => @first_restaurant.subdomain
+      })
+    end
+  end
+
   describe 'POST #create' do
     context 'when the restaurant is valid' do
       before(:example) do
