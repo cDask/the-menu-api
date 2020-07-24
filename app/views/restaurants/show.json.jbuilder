@@ -16,6 +16,7 @@ json.restaurant do
           json.array! menu.items do |item|
             json.id item.id
             json.name item.name
+            json.description item.description
             json.sizes item.sizes
             json.tags item.tags
             json.ingredients item.ingredients
