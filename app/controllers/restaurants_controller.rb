@@ -7,7 +7,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find_by_subdomain(params[:subdomain])
+    @restaurant = Restaurant.find_by(subdomain: params[:subdomain])
   end
 
   def create
