@@ -23,7 +23,7 @@ class ContactInfosController < ApplicationController
   end
 
   def destroy
-    @contact_info.delete
+    @contact_info.destroy
     render json: {}, status: :no_content
   end
 

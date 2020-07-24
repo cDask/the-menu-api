@@ -29,7 +29,7 @@ class RestaurantsController < ApplicationController
   end
 
   def destroy
-    @restaurant.delete
+    @restaurant.destroy
     render json: {}, status: :no_content
   end
 
