@@ -5,10 +5,10 @@ RSpec.describe "Restaurants", type: :request do
       before(:example) do
         user = user_with_restaurants
         @first_restaurant = user.restaurants.first
-        get '/restaurants', headers: authenticated_header(user)
+        get '/restaurants.json', headers: authenticated_header(user)
         @json_response = JSON.parse(response.body)
       end
-  
+      
       it 'returns http success' do
         expect(response).to have_http_status(:success)
       end
@@ -27,6 +27,28 @@ RSpec.describe "Restaurants", type: :request do
       end
   end
 
+  describe 'GET #show' do
+    before(:example) do
+      user = user_with_restaurants
+      @first_restaurant = user.restaurants.first
+      get "/getrestaurants/#{@first_restaurant.subdomain}.json", headers: authenticated_header(user)
+      @json_response = JSON.parse(response.body)
+    end
+    
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'JSON response body contains expected attributes' do
+      expect(@json_response['restaurant']).to include({
+        'id' => @first_restaurant.id,
+        'name' => @first_restaurant.name,
+        'opening_hours' => @first_restaurant.opening_hours,
+        'subdomain' => @first_restaurant.subdomain
+      })
+    end
+  end
+
   describe 'POST #create' do
     context 'when the restaurant is valid' do
       before(:example) do
@@ -38,7 +60,7 @@ RSpec.describe "Restaurants", type: :request do
         expect(response).to have_http_status(:created)
       end
   
-      it 'saves the Trail to the database' do
+      it 'saves the restaurant to the database' do
         expect(Restaurant.last.name).to eq(@restaurant_params[:name])
       end
     end
@@ -54,8 +76,7 @@ RSpec.describe "Restaurants", type: :request do
       end
   
       it 'returns the correct number of errors' do
-        pp @json_response['errors']
-        expect(@json_response['errors'].count).to eq(2)
+        expect(@json_response['errors'].count).to eq(1)
       end
   
       it 'errors contains the correct message' do
@@ -104,7 +125,7 @@ RSpec.describe "Restaurants", type: :request do
       expect(response).to have_http_status(:no_content)
     end
 
-    it 'removes the trail from the database' do
+    it 'removes the restaurant from the database' do
       expect(Restaurant.count).to eq(0)
     end
   end

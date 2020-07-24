@@ -1,16 +1,13 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:show]
   before_action :set_restaurant, only: %i[update destroy]
 
   def index
-    restaurants = current_user.restaurants.includes(:contact_infos, :theme, :style, menus: [:items])
-    restaurants_records_with_associations = restaurants.map do |record|
-      record.attributes.merge(
-        'menus' => record.menus,
-        'theme' => record.theme
-      )
-    end
-    render json: { restaurants: restaurants_records_with_associations }, status: :ok
+    @restaurants = current_user.restaurants.includes(:contact_infos, :theme, :style, menus: [:items])
+  end
+
+  def show
+    @restaurant = Restaurant.find_by(subdomain: params[:subdomain])
   end
 
   def create

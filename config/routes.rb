@@ -6,9 +6,17 @@ Rails.application.routes.draw do
   get "/status", to: "status#index"
   get "/status/user", to: "status#user"
 
-  
-  resources :restaurants
+  get "/getrestaurants/:subdomain", to: "restaurants#show", as:"get_restaurants"
+  resources :restaurants do
+    resources :menus, only: [:create, :update, :destroy]
+    resources :contact_infos, only: [:create, :update, :destroy]
+  end
 
-  # Menu route post localhost3000/menus
-  # Restauarnt route post localhost3000/restaurants
+  resources :items do
+    resources :ingredients, only: [:create, :update, :destroy]
+    resources :sizes, only: [:create, :update, :destroy]
+  end
+  resources :tags, only: [:index,:create]
+  resources :themes, only: [:show, :create, :update, :destroy]
+  resources :styles, only: [:show, :create, :update, :destroy]
 end

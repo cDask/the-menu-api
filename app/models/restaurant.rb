@@ -6,10 +6,10 @@ class Restaurant < ApplicationRecord
   validates :opening_hours, presence: true, format: { with: /{*}/, message: 'json only baby' }
 
   belongs_to :user
-  has_many :contact_infos
-  has_many :menus
-  has_one :theme, as: :themeable
-  has_many :style, as: :styleable
+  has_many :contact_infos, dependent: :destroy
+  has_many :menus, dependent: :destroy
+  has_one :theme, as: :themeable, dependent: :destroy
+  has_many :style, as: :styleable, dependent: :destroy
 
   private
 
