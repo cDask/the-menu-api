@@ -7,7 +7,7 @@ class ContactInfosController < ApplicationController
     contact_info = ContactInfo.new(contact_info_params)
     contact_info.restaurant = restaurant
     if contact_info.save
-      render json: {}, status: :created
+      render json: contact_info, status: :created
     else
       render json: { errors: contact_info.errors.full_messages }, status: :unprocessable_entity
     end
