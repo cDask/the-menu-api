@@ -25,7 +25,7 @@ p 'users 🤷‍♂️'
   res = Restaurant.create(
     name: res_name,
     user: user,
-    opening_hours: "{json string of opening hours}",
+    opening_hours: '{"opening_hours":[{"day":"Monday","opening_hours":{"open_hr":"11","open_min":"00","open_ampm":"am"},"closing_hours":{"close_hr":"10","close_min":"00","close_ampm":"pm"}}]}',
     subdomain: res_name
   )
 
