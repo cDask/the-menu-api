@@ -29,7 +29,7 @@ RSpec.describe "Statuses", type: :request do
         end
     
         it 'returns the correct email' do
-            expect(@json_response['user']).to eq(@user.email)
+            expect(@json_response['user']['email']).to eq(@user.email)
         end
     end   
 end
