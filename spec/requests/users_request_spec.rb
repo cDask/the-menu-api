@@ -46,7 +46,7 @@ RSpec.describe "Users", type: :request do
 			end
 
 			it 'has a http no content response status' do
-				expect(response).to have_http_status(:no_content)
+				expect(response).to have_http_status(:ok)
 			end
 
 			it 'updates the opening hours in the database' do
@@ -57,7 +57,7 @@ RSpec.describe "Users", type: :request do
 			before(:example) do
 				@user = create(:user)
 					put "/users/#{@user.id}",params: { user: {full_name: nil} }, headers: authenticated_header()
-				@json_response = JSON.parse(response.body)
+        @json_response = JSON.parse(response.body)
 			end
 			it 'returns an unprocessable entity response ' do
 				expect(response).to have_http_status(:unprocessable_entity)
