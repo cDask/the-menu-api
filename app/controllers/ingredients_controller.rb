@@ -23,7 +23,7 @@ class IngredientsController < ApplicationController
   end
 
   def destroy
-    @ingredient.delete
+    @ingredient.destroy
     render json: {}, status: :no_content
   end
 

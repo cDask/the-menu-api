@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
     item = Item.new(item_params)
     item.menu = menu
     if item.save
-      render json: {}, status: :created
+      render json: item, status: :created
     else
       render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.delete
+    @item.destroy
     render json: {}, status: :no_content
   end
 

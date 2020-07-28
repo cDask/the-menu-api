@@ -23,7 +23,7 @@ class SizesController < ApplicationController
   end
 
   def destroy
-    @size.delete
+    @size.destroy
     render json: {}, status: :no_content
   end
 
