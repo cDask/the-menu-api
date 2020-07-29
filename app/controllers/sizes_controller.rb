@@ -7,7 +7,7 @@ class SizesController < ApplicationController
     size = Size.new(size_params)
     size.item = item
     if size.save
-      render json: {}, status: :created
+      render json: size, status: :created
     else
       render json: { errors: size.errors.full_messages }, status: :unprocessable_entity
     end
