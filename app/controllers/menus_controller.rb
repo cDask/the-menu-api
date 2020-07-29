@@ -7,7 +7,7 @@ class MenusController < ApplicationController
     menu = Menu.new(menu_params)
     menu.restaurant = restaurant
     if menu.save
-      render json: {}, status: :created
+      render json: menu, status: :created
     else
       render json: { errors: menu.errors.full_messages }, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class MenusController < ApplicationController
   end
 
   def destroy
-    @menu.delete
+    @menu.destroy
     render json: {}, status: :no_content
   end
 

@@ -13,7 +13,7 @@ class RestaurantsController < ApplicationController
   def create
     restaurant = current_user.restaurants.new(restaurant_params)
     if restaurant.save
-      render json: {}, status: :created
+      render json: restaurant, status: :created
     else
       render json: { errors: restaurant.errors.full_messages }, status: :unprocessable_entity
     end

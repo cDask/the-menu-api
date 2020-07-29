@@ -7,7 +7,7 @@ class IngredientsController < ApplicationController
     ingredient = Ingredient.new(ingredient_params)
     ingredient.item = item
     if ingredient.save
-      render json: {}, status: :created
+      render json: ingredient, status: :created
     else
       render json: { errors: ingredient.errors.full_messages }, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class IngredientsController < ApplicationController
   end
 
   def destroy
-    @ingredient.delete
+    @ingredient.destroy
     render json: {}, status: :no_content
   end
 

@@ -13,6 +13,7 @@ json.restaurants do
         json.title menu.title
         json.created_at menu.created_at
         json.updated_at menu.updated_at
+        json.restaurant_id menu.restaurant_id
         json.items do
           json.array! menu.items do |item|
             json.id item.id
@@ -22,10 +23,11 @@ json.restaurants do
             json.tags item.tags
             json.ingredients item.ingredients
             json.styles item.styles
+            json.menu_id item.menu_id
           end
         end
         json.theme menu.theme
-        json.styles menu.styles
+        json.style menu.style
       end
     end
     json.contact_infos restaurant.contact_infos

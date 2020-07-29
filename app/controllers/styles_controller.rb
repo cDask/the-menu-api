@@ -24,7 +24,7 @@ class StylesController < ApplicationController
   end
 
   def destroy
-    @style.delete
+    @style.destroy
     render json: {}, status: :no_content
   end
 

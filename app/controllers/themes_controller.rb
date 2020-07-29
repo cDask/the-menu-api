@@ -24,7 +24,7 @@ class ThemesController < ApplicationController
   end
 
   def destroy
-    @theme.delete
+    @theme.destroy
     render json: {}, status: :no_content
   end
 
