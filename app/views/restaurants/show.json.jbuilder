@@ -20,11 +20,11 @@ json.restaurant do
             json.sizes item.sizes
             json.tags item.tags
             json.ingredients item.ingredients
-            json.styles item.styles
+            json.style item.style
           end
         end
         json.theme menu.theme
-        json.styles menu.styles
+        json.style menu.style
       end
     end
     json.contact_infos @restaurant.contact_infos

@@ -22,7 +22,7 @@ json.restaurants do
             json.sizes item.sizes
             json.tags item.tags
             json.ingredients item.ingredients
-            json.styles item.styles
+            json.style item.style
             json.menu_id item.menu_id
           end
         end
