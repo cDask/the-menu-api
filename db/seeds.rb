@@ -57,7 +57,7 @@ p 'users 🤷‍♂️'
     styleable: res
   )
 
-  p "and a Restaurant called #{res.name}, with the #{res.theme.theme_class} theme and a style of #{res.style.first.style_data}"
+  p "and a Restaurant called #{res.name}, with the #{res.theme.theme_class} theme and a style of #{res.style.style_data}"
 
   2.times do
     menu = Menu.create(

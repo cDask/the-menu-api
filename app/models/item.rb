@@ -6,6 +6,6 @@ class Item < ApplicationRecord
   has_many :item_tags, dependent: :destroy
   has_many :tags, through: :item_tags
   has_one :theme, as: :themeable, dependent: :destroy
-  has_many :styles, as: :styleable, dependent: :destroy
+  has_one :style, as: :styleable, dependent: :destroy
   has_one_attached :picture
 end

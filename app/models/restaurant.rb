@@ -9,7 +9,7 @@ class Restaurant < ApplicationRecord
   has_many :contact_infos, dependent: :destroy
   has_many :menus, dependent: :destroy
   has_one :theme, as: :themeable, dependent: :destroy
-  has_many :style, as: :styleable, dependent: :destroy
+  has_one :style, as: :styleable, dependent: :destroy
 
   private
 

@@ -67,7 +67,7 @@ RSpec.describe Restaurant, type: :model do
 
     it 'has many styles' do
       relation = Restaurant.reflect_on_association(:style)
-      expect(relation.macro).to eql(:has_many)
+      expect(relation.macro).to eql(:has_one)
     end
   end
 end

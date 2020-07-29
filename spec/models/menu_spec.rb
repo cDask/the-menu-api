@@ -4,7 +4,7 @@ RSpec.describe Menu, type: :model do
   let(:restaurant) { Restaurant.new }
   let(:items) { Item.new }
   let(:theme) { Theme.new }
-  let(:styles) { Style.new }
+  let(:style) { Style.new }
   subject { described_class.new(
     title: 'Main Menu',
     restaurant: restaurant
@@ -38,8 +38,8 @@ RSpec.describe Menu, type: :model do
     end
 
     it 'has many styles' do
-      relation = Menu.reflect_on_association(:styles)
-      expect(relation.macro).to eql(:has_many)
+      relation = Menu.reflect_on_association(:style)
+      expect(relation.macro).to eql(:has_one)
     end
   end
 end

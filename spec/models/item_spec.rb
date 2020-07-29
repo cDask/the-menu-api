@@ -5,7 +5,7 @@ RSpec.describe Item, type: :model do
   let(:ingredients) { Ingredient.new }
   let(:sizes) { Size.new }
   let(:theme) { Theme.new }
-  let(:styles) { Style.new }
+  let(:style) { Style.new }
   let(:item_tags) { ItemTag.new }
   let(:tags) { Tag.new }
   subject {described_class.new(
@@ -57,8 +57,8 @@ RSpec.describe Item, type: :model do
     end
 
     it 'has many styles' do
-      relation = Menu.reflect_on_association(:styles)
-      expect(relation.macro).to eql(:has_many)
+      relation = Menu.reflect_on_association(:style)
+      expect(relation.macro).to eql(:has_one)
     end
   end
 end
