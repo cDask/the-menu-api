@@ -48,12 +48,7 @@ p 'users 🤷‍♂️'
   )
 
   Style.create(
-    style_data: "{
-    'headerColour': #{Faker::Color.hex_color},
-    'textColour': #{Faker::Color.hex_color},
-    'backgroundColour': #{Faker::Color.hex_color},
-    'foregroundColour': #{Faker::Color.hex_color} 
-    }",
+    style_data: '{"foreground":"#FFFFFF","background":"#000000","color":"#811616","border":"#b929b2","header":"#b02b3e"}',
     styleable: res
   )
 
@@ -69,13 +64,8 @@ p 'users 🤷‍♂️'
       themeable: menu
     )
     Style.create(
-      style_data: "{
-        'headerColour': #{Faker::Color.hex_color},
-        'textColour': #{Faker::Color.hex_color},
-        'backgroundColour': #{Faker::Color.hex_color},
-        'foregroundColour': #{Faker::Color.hex_color} 
-        }",
-      styleable: menu
+      style_data: '{"foreground":"#FFFFFF","background":"#000000","color":"#811616","border":"#b929b2","header":"#b02b3e"}',
+      styleable: res
     )
     5.times do 
       item = Item.create(
