@@ -31,7 +31,7 @@ class StylesController < ApplicationController
   private
 
   def style_params
-    params.require(:style).permit(:style_data, :background, :foreground, :color, :border, :header)
+    params.require(:style).permit(:style_data)
   end
 
   def set_style
