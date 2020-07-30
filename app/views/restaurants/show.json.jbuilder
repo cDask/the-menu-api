@@ -5,6 +5,7 @@ json.restaurant do
     json.opening_hours @restaurant.opening_hours
     json.created_at @restaurant.created_at
     json.updated_at @restaurant.updated_at
+    json.style @restaurant.style
 
     json.menus do
       json.array! @restaurant.menus do |menu|

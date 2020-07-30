@@ -8,7 +8,7 @@ class StylesController < ApplicationController
     style.styleable_id = params[:styleable_id]
 
     if style.save
-      render json: {}, status: :created
+      render json: style, status: :created
     else
       render json: { errors: style.errors.full_messages }, status: :unprocessable_entity
     end
