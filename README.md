@@ -4,6 +4,8 @@
 - [Api address](https://the-menu-api.herokuapp.com/)
 - [Front End React Github](https://github.com/dannyknows/the-menu-client)
 - [Back End Rails Api Github](https://github.com/cDask/the-menu-api)
+- [Trello Board](https://trello.com/b/ltlnpgUl/t3a2-final-project)
+- [Manual Testing SpreadSheet](https://docs.google.com/spreadsheets/d/1kYWlWmVTFxD0SrZs61tq-D_yUbCguGuq2fswmia8LYw/edit?usp=sharing)
 
 # Set up
 
@@ -15,6 +17,8 @@ To use the web site locally some things are required to set it up properly. Incl
 2. Using CLI `cd` into the directory and run:
 ```
   bundle install
+
+  yarn install
 ```
 3. Create the database by running:
 
@@ -550,3 +554,17 @@ Danny Lowater:
 Daniel Ask: Finished off restaurant style manipulation and finished off manual testing. Fixed some bugs. Set up the read me adding links, task management, trello shots, libraries and the set up guide.
 
 Danny Lowater:
+
+# Code Coverage Report
+
+The back end has been thoroughly tested and can be tested by running the `bin/rspec` from the command line in the source directory of the api project. Below is a screen shot the latest coverage report.
+
+![Code Coverage Report](./resources/CodeCoverageBackEnd.png)
+
+# Manual Testing
+
+This is the manual testing spreadsheet.
+
+[Manual Testing SpreadSheet](https://docs.google.com/spreadsheets/d/1kYWlWmVTFxD0SrZs61tq-D_yUbCguGuq2fswmia8LYw/edit?usp=sharing)
+
+![Manual Testing Spreadsheet Image](resources/ManualTesting.png)
