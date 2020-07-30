@@ -73,6 +73,20 @@ p 'users 🤷‍♂️'
         description: Faker::Food.description,
         menu: menu
       )
+      Theme.create(
+      theme_class: ["minimal", "bold", "colourful"].sample,
+      themeable: item
+      )
+      
+      Style.create(
+        style_data: "{
+          'headerColour': #{Faker::Color.hex_color},
+          'textColour': #{Faker::Color.hex_color},
+          'backgroundColour': #{Faker::Color.hex_color},
+          'foregroundColour': #{Faker::Color.hex_color} 
+          }",
+        styleable: item
+      )
 
       tag = Tag.create(
         name: ["takeaway available", "main", "entrée"].sample
